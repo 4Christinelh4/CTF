@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %} Challenge: XSS challenge 1 solved!!! {% endblock %}</h2>
+    <h1>Congradulations! </h1>
+    
+    <a href="{{ url_for('homepage') }}">Back to homepage, solve other challenges</a>
+
+{% endblock %}

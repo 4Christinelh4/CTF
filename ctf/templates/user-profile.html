@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Hello, {{ username }}</h1>
+
+<h2>course list</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>course name</th>
+            <th>course status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course in course_list %}
+            <tr>
+                <td>{{ course.name }}</td>
+                <td>
+                    {% if course.status %}
+                        Completed
+                    {% else %}
+                        Unknown OR Ongoing
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

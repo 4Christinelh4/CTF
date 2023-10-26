@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %} Challenge: SQL injection 2 solved! You have cracked the top_secret! {% endblock %}</h2>
+    <h1>Congradulations! </h1>
+
+    <p>
+        You are awesome
+    </p>
+
+    <a href="{{ url_for('homepage') }}">Back to homepage, solve other challenges</a>
+
+{% endblock %}

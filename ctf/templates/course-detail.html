@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% autoescape false %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        /* Style for the course items */
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Courses</h1>
+
+    {% if error %}
+    <script>
+        var e = '{{ error }}'
+        alert(e)
+    </script>
+    {% endif %} 
+
+    <!-- Course 1 -->
+    <div class="course-item">
+        <div>
+        <form name="select_form" action="{{ url_for('viewCourseDetail', course_name=course.name) }}" method="post">
+            <h2>{{ course.name }}</h2>
+            <h2>{{ course.description }}</h2>
+            <input type="submit" value="Select" name="form_select_submit">
+        </form>
+        </div>
+    </div>
+
+    <div>
+        <h1>Leave a comment</h1>
+        <form name="comment_form" action="{{ url_for('viewCourseDetail', course_name=course.name) }}" method="post">
+            <textarea name="comment" rows="4" cols="50" placeholder="Type your comment here"></textarea>
+            <br>
+            <input type="url" name="link_url" placeholder="Enter a link (optional)">
+            <input type="text" name="link_text" placeholder="Link text (optional)">
+            <br>
+            <input type="file" name="image" accept="image/*">
+            <br>
+            <input type="submit" value="Send" name ="form_comment">
+        </form>
+    </div>
+
+    <h1>Comments</h1>
+    {% for entry in comments %}
+        <div>           
+            <p>{{ entry }}</p>
+        </div>
+    {% endfor %}
+
+    <div>
+        <h1>Ask us anything</h1>
+        <form name="query_form" action="{{ url_for('viewCourseDetail', course_name=course.name) }}" method="post">
+            <textarea name="question" rows="4" cols="50" placeholder="Ask us anything: "></textarea>
+            <br>
+            <input type="submit" value="Send" name ="form_question">
+        </form>
+    </div>
+
+</body>
+</html>
+{% endautoescape %}
