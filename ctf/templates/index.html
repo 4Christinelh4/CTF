@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    <h1>Welcome back, I miss u so much</h1>
+    <h1 class="addition-text">Welcome back, I miss u so much</h1>
     
     {% if error %}
     <script>
@@ -10,9 +10,7 @@
         alert(e)
     </script>
     {% endif %} 
-
-    <div>
-        <h2 class="heading">
+        <h1 class="heading addtion-heading">
             <form method="POST" action="/">
                 <p>
                     {{ form.username.label }}
@@ -51,13 +49,13 @@
             {% endif %} 
         </h2>
 
-        <div>
+        <div class="addition-text">
             <a href="{{ url_for('register') }}">No account? register today</a>
         </div>
 
-        <div>
+        <div class="addition-text">
             <a href="{{ url_for('reset_pw') }}">Reset password</a>
         </div>
-    </div>
+
     
 {% endblock %}

@@ -1,9 +1,12 @@
 # 2023 COMP6841 My awesome project
-
 ## Overview of attacks
 Players may find that they can perform a bunch of cyber attackers to this vulnerable website. All the attacks can be found in OWASP top 10 [OWASP TOP10](https://owasp.org/www-project-top-ten/).
 1. SQL Injection
+···* Warm up, can you print out all users' names and passwords?
+···* Shhhhh... there's a top secret in this website...
 2. XSS (stored & reflected)
+···* Stored XSS: typically refering to the XSS attack where malicious scripts are stored in the server(database), and executed on the user's browser.
+···* Reflected XSS: unlike the stored XSS executing on the user's server, a reflected XSS attack executes on the server. Can you perform both XSS on /view-course page?
 3. Broken access control
 4. CSRF
 
@@ -46,4 +49,7 @@ python3 ctf/app.py 5044
 
 
 ## Spoiler alert 😈
-
+### 🌶 SQL injection 1
+### 🥓 SQL injection 2
+### 🚨 CSRF
+### 🛸 Reflected XSS
