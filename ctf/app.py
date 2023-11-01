@@ -5,13 +5,14 @@ from forms.home import Register
 from cruds.crud import CrudUser
 import hashlib
 import helper
+import sys
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'comp6841extension'
 
 # Connect to the database
 conn = psycopg2.connect(database="comp6841db", user="postgres",
-                        password="postgres", host="localhost", port="5432")
+                        password="postgres", host="localhost", port=sys.argv[1])
 
 crud_user = CrudUser(conn)
 
