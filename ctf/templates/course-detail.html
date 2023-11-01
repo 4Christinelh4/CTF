@@ -13,6 +13,7 @@
             margin-bottom: 20px;
         }
     </style>
+    <link rel="stylesheet" href="/static/assets/css/styles.css">
 </head>
 <body>
     <h1>Available Courses</h1>
@@ -30,7 +31,7 @@
         <form name="select_form" action="{{ url_for('viewCourseDetail', course_name=course.name) }}" method="post">
             <h2>{{ course.name }}</h2>
             <h2>{{ course.description }}</h2>
-            <input type="submit" value="Select" name="form_select_submit">
+            <input type="submit" value="Select" name="form_select_submit" class="btn">
         </form>
         </div>
     </div>
@@ -38,14 +39,9 @@
     <div>
         <h1>Leave a comment</h1>
         <form name="comment_form" action="{{ url_for('viewCourseDetail', course_name=course.name) }}" method="post">
-            <textarea name="comment" rows="4" cols="50" placeholder="Type your comment here"></textarea>
+            <textarea class="text-input" name="comment" rows="4" cols="50" placeholder="Type your comment here"></textarea>
             <br>
-            <input type="url" name="link_url" placeholder="Enter a link (optional)">
-            <input type="text" name="link_text" placeholder="Link text (optional)">
-            <br>
-            <input type="file" name="image" accept="image/*">
-            <br>
-            <input type="submit" value="Send" name ="form_comment">
+            <input type="submit" value="Send" name ="form_comment" class="btn">
         </form>
     </div>
 
@@ -59,9 +55,9 @@
     <div>
         <h1>Ask us anything</h1>
         <form name="query_form" action="{{ url_for('viewCourseDetail', course_name=course.name) }}" method="post">
-            <textarea name="question" rows="4" cols="50" placeholder="Ask us anything: "></textarea>
+            <textarea class="text-input" name="question" rows="4" cols="50" placeholder="Ask us anything: "></textarea>
             <br>
-            <input type="submit" value="Send" name ="form_question">
+            <input type="submit" value="Send" name ="form_question" class="btn">
         </form>
     </div>
 

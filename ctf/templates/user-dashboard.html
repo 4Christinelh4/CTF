@@ -17,30 +17,34 @@
             padding: 10px;
             border: 1px solid #ccc;
             cursor: pointer;
+            border-color: black;
+            border-width: 3px;
+            width: 80%;
         }
 
-        /* Add CSS styles for positioning the link */
-        .prof-link {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        .course-item a {
+            color: darkred;
         }
 
     </style>
+    <link rel="stylesheet" href="/static/assets/css/styles.css">
 </head>
 <body>
     <h1>Hello, {{ username }}</h1>
-
-    <a class="top-right" href="{{ url_for('userProfile') }}">User Profile</a>
+    <div>
+        <a href="{{ url_for('userProfile') }}">User Profile</a>
+    </div>
+    
 
     <ul class="course-list"> 
         {% for course in course_ls %}
-        <li class="course-item">
-            <div>
-                <h3>{{ course.name }}</h3>
-                <a href="{{ url_for('viewCourseDetail', course_name = course.name ) }}" class="btn btn-primary">View details</a>
-            </div>
-        </li>
+
+            <li class="course-item">
+                <div>
+                    <h3>{{ course.name }}</h3>
+                    <a href="{{ url_for('viewCourseDetail', course_name = course.name ) }}" class="btn btn-primary">View details</a>
+                </div>
+            </li>
         {% endfor %}
     </ul>
 

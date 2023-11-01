@@ -9,8 +9,17 @@ class CrudUser:
         self.connection.commit()
         cur.close()
 
-    def change_password(self, username, new_pw):
-        pass
+    def change_password(self, email, new_pw):
+        cur = self.connection.cursor()
+        cur.execute('''update person set password = %s where email = %s''', (new_pw, email))
+        # Get the number of rows updated
+        updated_rows = cur.rowcount
+
+        self.connection.commit()
+        cur.close()
+
+        return updated_rows
+
 
     def searchUser(self, username, password):
         # print(f"[DEBUG]: search user {username}, {password}")
@@ -29,8 +38,6 @@ class CrudUser:
         # table_name from information_schema.tables where table_catalog = 'comp6841db' and table_schema = 'public'; -- 
         # this is where the injection happens !
         query = "select name, password from person where name = '" + username + "' and password = '" + password + "';"
-        # print(f"query = {query}")
-
         # check if the query is select all tables, because 'public' is very particular in pgsql
         # ' union select something, table_name from information_schema.tables where table_catalog = '';
 

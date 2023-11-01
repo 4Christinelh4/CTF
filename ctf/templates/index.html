@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    <h1>I miss you sooooo much</h1>
+    <h1>Welcome back, I miss u so much</h1>
     
     {% if error %}
     <script>
@@ -16,7 +16,7 @@
             <form method="POST" action="/">
                 <p>
                     {{ form.username.label }}
-                    {{ form.username(size=40) }}
+                    {{ form.username(class="text-input") }}
                 </p>
         
                 {% if form.username.errors %}
@@ -29,7 +29,7 @@
         
                 <p>
                     {{ form.password.label }}
-                    {{ form.password(size=40) }}
+                    {{ form.password(class="text-input") }}
                 </p>
         
                 {% if form.password.errors %}
@@ -49,9 +49,15 @@
             <h2>{{ entries[0] }}</h2>
             <h2>{{ entries[1] }}</h2>
             {% endif %} 
-        
-            <a href="{{ url_for('register') }}">No account? register today</a>
         </h2>
+
+        <div>
+            <a href="{{ url_for('register') }}">No account? register today</a>
+        </div>
+
+        <div>
+            <a href="{{ url_for('reset_pw') }}">Reset password</a>
+        </div>
     </div>
     
 {% endblock %}

