@@ -1,20 +1,17 @@
-{% extends 'base.html' %}
-
+{% extends 'challenge_base.html' %}
 {% block content %}
-    <h2>{% block title %} Challenge: SQL injection 1 solved!!! {% endblock %}</h2>
-    <h1>Congradulations! </h1>
-
-
-    <ul> 
-        {% for username in dummy_usernames %}
-        <li>
-            <div>
-                <h3>{{ username }}</h3>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <a href="{{ url_for('homepage') }}">Back to homepage, solve other challenges</a>
-
+        <h2>Challenge: SQL injection 1 solved!</h2>
+        <h1>Congradulations! </h1>
+    
+        <ul> 
+            {% for username in dummy_usernames %}
+            <li>
+                <div>
+                    <h3>{{ username }}</h3>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    
+        <a href="{{ url_for('homepage') }}">Back to homepage, solve other challenges</a>    
 {% endblock %}

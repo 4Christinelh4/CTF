@@ -1,8 +1,10 @@
-{% extends 'base.html' %}
-
+{% extends 'challenge_base.html' %}
 {% block content %}
-    <h2>{% block title %} Challenge: XSS challenge 1 solved!!! {% endblock %}</h2>
-    <h1>Congradulations! </h1>
+    <h2>Challenge: XSS challenge 1 solved!</h2>
+    <p>
+        In this challenge, the script you entered is stored in the backend database, and this causes the script executing 
+        when other people enter this url. It is a stored XSS attack.
+    </p>
     
     <a href="{{ url_for('homepage') }}">Back to homepage, solve other challenges</a>
 

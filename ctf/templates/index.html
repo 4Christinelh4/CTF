@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>{% block title %} I miss you sooooo much {% endblock %}</h1>
 
+{% block content %}
+    <h1>I miss you sooooo much</h1>
+    
     {% if error %}
     <script>
         var e = '{{ error }}'
@@ -10,43 +11,47 @@
     </script>
     {% endif %} 
 
-    <form method="POST" action="/">
-        <p>
-            {{ form.username.label }}
-            {{ form.username(size=40) }}
-        </p>
-
-        {% if form.username.errors %}
-            <ul class="errors">
-                {% for error in form.username.errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-        <p>
-            {{ form.password.label }}
-            {{ form.password(size=40) }}
-        </p>
-
-        {% if form.password.errors %}
-            <ul class="errors">
-                {% for error in form.password.errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-        <p>
-            <input type="submit" value="Log in">
-        </p>
-    </form>
-
-    {% if entries %}
-    <h2>{{ entries[0] }}</h2>
-    <h2>{{ entries[1] }}</h2>
-    {% endif %} 
-
-    <a href="{{ url_for('register') }}">No account? register today</a>
-
+    <div>
+        <h2 class="heading">
+            <form method="POST" action="/">
+                <p>
+                    {{ form.username.label }}
+                    {{ form.username(size=40) }}
+                </p>
+        
+                {% if form.username.errors %}
+                    <ul class="errors">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+        
+                <p>
+                    {{ form.password.label }}
+                    {{ form.password(size=40) }}
+                </p>
+        
+                {% if form.password.errors %}
+                    <ul class="errors">
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+        
+                <p>
+                    <input type="submit" value="Log in" class="btn">
+                </p>
+            </form>
+        
+            {% if entries %}
+            <h2>{{ entries[0] }}</h2>
+            <h2>{{ entries[1] }}</h2>
+            {% endif %} 
+        
+            <a href="{{ url_for('register') }}">No account? register today</a>
+        </h2>
+    </div>
+    
 {% endblock %}

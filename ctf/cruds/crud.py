@@ -125,7 +125,7 @@ class CrudUser:
         cur.execute(query_student)
 
         student_id = int(cur.fetchall()[0][0])
-        print(f"course_id = {course_id}, studend_id = {student_id}")
+        # print(f"course_id = {course_id}, studend_id = {student_id}")
         query = f"insert into student_course values ({student_id}, {course_id}, 'f')"
 
         cur.execute(query)
@@ -142,7 +142,11 @@ class CrudUser:
 
     # remove xss comment
     def remove_xss_comment(self, course_id, single_comment):
-        print("remove xss comment")
+    #     print("remove xss comment")
+        cur = self.connection.cursor()
+        cur.execute('''delete from course_comment where course_id=%s and comment=%s''', (course_id, single_comment))
+        self.connection.commit()
+        cur.close()
 
     def selectAllCommentsByCourse(self, course_id):
         # return ["It's good", f"{course_name} is best one I've ever taken!!"]
