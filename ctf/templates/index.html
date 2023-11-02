@@ -2,15 +2,14 @@
 
 
 {% block content %}
-    <h1 class="addition-text">Welcome back, I miss u so much</h1>
-    
     {% if error %}
     <script>
         var e = '{{ error }}'
         alert(e)
     </script>
     {% endif %} 
-        <h1 class="heading addtion-heading">
+
+        <h1 class="heading">
             <form method="POST" action="/">
                 <p>
                     {{ form.username.label }}
@@ -43,19 +42,19 @@
                 </p>
             </form>
         
+
+            <div class="addition-text lower-text">
+                <a href="{{ url_for('register') }}">No account? register today</a>
+            </div>
+            <div class="addition-text lower-text">
+                <a href="{{ url_for('reset_pw') }}">Reset password</a>
+            </div>    
+
             {% if entries %}
-            <h2>{{ entries[0] }}</h2>
-            <h2>{{ entries[1] }}</h2>
+            <h3 class="lower-text">{{ entries[0] }}</h3>
+            <h3 class="lower-text">{{ entries[1] }}</h3>
             {% endif %} 
-        </h2>
 
-        <div class="addition-text">
-            <a href="{{ url_for('register') }}">No account? register today</a>
-        </div>
+        </h1>
 
-        <div class="addition-text">
-            <a href="{{ url_for('reset_pw') }}">Reset password</a>
-        </div>
-
-    
 {% endblock %}

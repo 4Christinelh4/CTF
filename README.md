@@ -8,7 +8,9 @@ Players may find that they can perform a bunch of cyber attackers to this vulner
     * Stored XSS: typically refering to the XSS attack where malicious scripts are stored in the server(database), and executed on the user's browser.
     * Reflected XSS: unlike the stored XSS executing on the user's server, a reflected XSS attack executes on the server. Can you perform both XSS on /view-course page?
 3. Broken access control
+    * When selecing a course with pre-requisite and when you haven't satisfy all the requisite, the website will not allow you to select the course. However, can you bypass the restriction and add COMP9900 to your list?
 4. CSRF
+    * 
 
 
 ## Structure
@@ -50,5 +52,17 @@ python3 ctf/app.py 5044
 ## Spoiler alert 😈
 ### SQL injection 1 🌶 
 ### SQL injection 2 🥓 
+- How to find out the name of the database?
 ### CSRF 🚨
 ### Reflected XSS 🛸
+- When you put "abcd" in the question form and submit, you will find the content you typed showing in the url.
+### Stored XSS 🥞
+- Hmmmm, maybe try using 
+    ```
+    <script>alert("the course is poorly designed")</script>
+    ```
+    in any comment box :D
+### Broken access control 🗝
+
+## Limitations
+This website is designed for cyber security learners to perform attacks. I planned to make a version that protect the website from all the above attacks, for example, with CSRF tokens implemented and sanitizations of user inputs. However, the version is not finished due to the time limit. 

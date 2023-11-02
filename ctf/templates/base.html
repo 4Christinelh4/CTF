@@ -10,29 +10,42 @@
     <link rel="stylesheet" href="/static/assets/css/effects.css">
     <style>
         nav a {
-            color: slateblue;
+            color: mintcream;
             font-size: 3em;
             margin-left: 50px;
         }
 
         .addtion-heading {
+            align-content: center;
             text-align: center;
-            background: url("/static/assets/img/Alternatives/hero-min.png") center center;
+            height: 100%;
+            background: url("/static/assets/img/Alternatives/galaxy01.jpg") center center;
             background-size: cover;
             background-repeat: no-repeat;
             color: chartreuse;
-            width: 700px;
-            height: 440px;
-            margin-left: 30px;
         }
 
         .addition-text {
+            padding-top: 20px;
             margin-left: 50px;
+            font-size: medium;
         }
+
+        .lower-text {
+            padding-top: 28px;
+            margin-bottom: 20px;
+        }
+
+        .lower-text a {
+            color: azure;
+            text-align: center;
+        }
+
+
     </style>
     <title>{% block title %} {% endblock %} - COMP6841 My Awesome Project</title>
 </head>
-<body>
+<body class="addtion-heading">
     <nav>
         <a href="{{ url_for('homepage') }}">COMP6841 open learning</a>
     </nav>

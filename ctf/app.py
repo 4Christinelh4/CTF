@@ -10,6 +10,10 @@ import sys
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'comp6841extension'
 
+if len(sys.argv) != 2:
+    print("usage: python3 app.py <port>")
+    exit(1)
+
 # Connect to the database
 conn = psycopg2.connect(database="comp6841db", user="postgres",
                         password="postgres", host="localhost", port=sys.argv[1])
