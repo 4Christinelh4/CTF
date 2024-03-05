@@ -5,18 +5,18 @@ from forms.home import Register
 from cruds.crud import CrudUser
 import hashlib
 import helper
-import sys
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'comp6841extension'
 
-if len(sys.argv) != 2:
-    print("usage: python3 app.py <port>")
-    exit(1)
-
 # Connect to the database
+conn = None
+retry = 0
+
+# while retry < 10:
 conn = psycopg2.connect(database="comp6841db", user="postgres",
-                        password="postgres", host="localhost", port=sys.argv[1])
+                        password="postgres", host="db")
 
 crud_user = CrudUser(conn)
 
@@ -151,7 +151,7 @@ def viewCourseDetail (course_name) :
             crud_user.insertCommentOnCourse(c_id, single_comment)
 
             if helper.check_finish_xss(single_comment):
-                crud_user.remove_xss_comment(c_id, single_comment)
+                # crud_user.remove_xss_comment(c_id, single_comment)
                 return render_template("solvedChallenge/challenge3.html")
             
         return redirect(url_for('viewCourseDetail', course_name=course_name))
@@ -211,4 +211,4 @@ def reset_pw():
     return render_template("change-password.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')

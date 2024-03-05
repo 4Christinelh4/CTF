@@ -1,3 +1,8 @@
+
+create database comp6841db;
+
+\c comp6841db;
+
 create table person (
     id serial not null primary key, 
     name varchar(64) not null, 

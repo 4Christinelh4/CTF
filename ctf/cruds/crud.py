@@ -19,7 +19,13 @@ class CrudUser:
         cur.close()
 
         return updated_rows
-
+    
+    def getUserSize(self):
+        cur = self.connection.cursor()
+        cur.execute('''select count(*) from person''')
+        sz = cur.fetchone()[0]
+        cur.close()
+        return sz
 
     def searchUser(self, username, password):
         # print(f"[DEBUG]: search user {username}, {password}")
