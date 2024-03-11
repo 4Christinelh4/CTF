@@ -1,8 +1,11 @@
-FROM postgres:13
-EXPOSE 5432
-COPY ./init_table.sql /docker-entrypoint-initdb.d/init.sql
+FROM python:3.11
 
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=postgres
+EXPOSE 5000
+RUN apt-get -q -y update && apt-get install -y gcc
+ENV WORKING_DIR=/app
+WORKDIR ${WORKING_DIR}
 
+COPY . /app
+RUN pip3 install -r /app/ctf/requirements.txt
+CMD python3 /app/ctf/app.py
 

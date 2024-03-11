@@ -2,23 +2,28 @@ version: '3.0'
 services:
   db:
     container_name: ctfdbcontainer
-    build: .
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./init_table.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: pg_isready -d comp6841db -U postgres -p 5432
       interval: 10s
       timeout: 30s
       retries: 3
-      start_period: 10s
+      start_period: 10s    
   ctf_app:
     container_name: ctfappcontainer
-    build: ./ctf
+    build: .
     links:
       - "db:database"
     ports:
       - "5000:5000" # docker container 5000, access from 5000 localhost
+    # entrypoint: ['/app/wait-for.sh', 'db:5432', '--', 'python3',  "/app/ctf/app.py"]
+    # command: ["python3", "/app/ctf/app.py"]
     depends_on:
       db:
         condition: service_healthy
-
-
 
